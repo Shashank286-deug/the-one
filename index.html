@@ -20,13 +20,13 @@
             overflow: hidden;
         }
 
-        /* --- FLOATING HEARTS BACKGROUND --- */
+        /* FLOATING HEARTS */
         .heart-bg {
             position: absolute;
             color: rgba(255, 255, 255, 0.6);
             animation: floatBackground 15s linear infinite;
             bottom: -10vh;
-            z-index: 0; /* Behind everything */
+            z-index: 0;
         }
 
         @keyframes floatBackground {
@@ -34,25 +34,24 @@
             100% { transform: translateY(-120vh) rotate(360deg); opacity: 0; }
         }
 
-        /* --- F1 RACING LAYER --- */
+        /* RACE TRACK */
         .race-track {
             position: absolute;
-            bottom: 20px; /* Position at the bottom */
+            bottom: 20px;
             left: 0;
             width: 100%;
             height: 100px;
-            z-index: 5; /* Behind the card, in front of hearts */
-            pointer-events: none; /* Let clicks pass through */
+            z-index: 5;
+            pointer-events: none;
         }
 
         .f1-car {
             position: absolute;
-            width: 150px; /* Size of the car */
+            width: 150px;
             bottom: 0;
             filter: drop-shadow(4px 4px 4px rgba(0,0,0,0.3));
         }
 
-        /* Car 1 Animation (The Leader) */
         .car-1 {
             left: -200px;
             animation: raceCar 8s linear infinite;
@@ -61,23 +60,22 @@
             z-index: 2;
         }
 
-        /* Car 2 Animation (The Chaser) */
         .car-2 {
             left: -200px;
             animation: raceCar 8s linear infinite;
-            animation-delay: 0.5s; /* 0.5s behind the first car */
-            bottom: 40px; /* Slightly higher/lower to look like overtaking */
+            animation-delay: 0.5s;
+            bottom: 40px;
             z-index: 1;
-            filter: hue-rotate(220deg) drop-shadow(4px 4px 4px rgba(0,0,0,0.3)); /* Change color to Blue */
+            filter: hue-rotate(220deg) drop-shadow(4px 4px 4px rgba(0,0,0,0.3));
         }
 
         @keyframes raceCar {
             0% { transform: translateX(-200px); }
-            10% { transform: translateX(20vw); } /* Speed up */
-            100% { transform: translateX(120vw); } /* Zoom off screen */
+            10% { transform: translateX(20vw); }
+            100% { transform: translateX(120vw); }
         }
 
-        /* --- MAIN CARD --- */
+        /* MAIN CONTAINER */
         .container {
             background: rgba(255, 255, 255, 0.95);
             padding: 30px;
@@ -89,9 +87,7 @@
             position: relative;
             text-align: center;
             border: 2px solid #ffd700;
-            z-index: 20; /* Keep card on TOP */
-            
-            /* Entry Animation */
+            z-index: 20;
             opacity: 0;
             transform: translateY(20px);
             animation: fadeInUp 1s ease-out forwards;
@@ -156,7 +152,7 @@
             color: white;
             box-shadow: 0 5px 15px rgba(255, 71, 126, 0.4);
             z-index: 10;
-            transition: transform 0.2s, box-shadow 0.2s;
+            transition: transform 0.2s;
             animation: pulse 2s infinite;
         }
 
@@ -180,6 +176,7 @@
             transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1); 
         }
 
+        /* SUCCESS & LETTER */
         .success-message {
             display: none;
             opacity: 0;
@@ -214,9 +211,17 @@
             font-size: 2rem;
             background: #fff;
         }
-        
-        .letter-box strong {
-            color: #d63384;
+
+        /* Typewriter Cursor Effect */
+        #typewriter-text {
+            border-right: 2px solid #d63384;
+            white-space: pre-wrap; /* Keeps formatting */
+            animation: blink 0.75s step-end infinite;
+        }
+
+        @keyframes blink {
+            from, to { border-color: transparent }
+            50% { border-color: #d63384; }
         }
 
         .success-message img {
@@ -231,16 +236,13 @@
 <body>
 
     <div class="race-track">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/e/e8/F1_car_Red_Bull_Racing_RB9_2013.svg" class="f1-car car-1" alt="F1 Car 1">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/e/e8/F1_car_Red_Bull_Racing_RB9_2013.svg" class="f1-car car-2" alt="F1 Car 2">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/e/e8/F1_car_Red_Bull_Racing_RB9_2013.svg" class="f1-car car-1" alt="Red Bull">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/e/e8/F1_car_Red_Bull_Racing_RB9_2013.svg" class="f1-car car-2" alt="Red Bull">
     </div>
 
     <div class="container" id="mainCard">
         <h1>Hi Meethi 👑❤️</h1>
-        
-        <p class="quote">
-            "In all the world, there is no heart for me like yours."
-        </p>
+        <p class="quote">"In all the world, there is no heart for me like yours."</p>
 
         <div class="reasons">
             <strong>Why you are my Queen:</strong>
@@ -255,105 +257,3 @@
         <h2>Will you go out with me?</h2>
 
         <div class="buttons">
-            <button class="btn-yes" onclick="acceptLove()">YES!</button>
-            <button class="btn-no" id="noBtn" onmouseover="moveButton()" onclick="moveButton()" ontouchstart="moveButton()">No</button>
-        </div>
-    </div>
-
-    <div class="container success-message" id="successCard">
-        <h1>Yay! 👑❤️</h1>
-        
-        <div class="letter-box">
-            <p><strong>My Dearest Queen Meethi,</strong></p>
-            <p>
-                I've been wanting to tell you this for a while. You really are the most special person in my life. 
-                Every moment with you feels like a happy memory in the making.
-            </p>
-            <p>
-                I promise to always treat you like royalty, to make you smile, and to be your biggest fan.
-                Thank you for being my Bacha. ❤️
-            </p>
-            <p>
-                Yours forever,<br>
-                <strong>Shashank (Your Prince 👑)</strong>
-            </p>
-        </div>
-
-        <img src="https://media.giphy.com/media/1HQG7F11R6Rfa/giphy.gif" alt="Royal Love Dance">
-    </div>
-
-    <script>
-        // --- FLOATING HEARTS BACKGROUND ---
-        function createHeart() {
-            const heart = document.createElement('div');
-            heart.classList.add('heart-bg');
-            heart.innerHTML = '❤️';
-            heart.style.left = Math.random() * 100 + 'vw';
-            heart.style.fontSize = Math.random() * 20 + 10 + 'px';
-            heart.style.animationDuration = Math.random() * 5 + 10 + 's';
-            document.body.appendChild(heart);
-            setTimeout(() => { heart.remove(); }, 15000);
-        }
-        setInterval(createHeart, 600);
-
-        // --- NO BUTTON ESCAPE ---
-        const noBtn = document.getElementById('noBtn');
-        function moveButton() {
-            const btnRect = noBtn.getBoundingClientRect();
-            const maxX = window.innerWidth - btnRect.width - 50;
-            const maxY = window.innerHeight - btnRect.height - 50;
-
-            const randomX = Math.random() * maxX;
-            const randomY = Math.random() * maxY;
-
-            noBtn.style.position = 'fixed'; 
-            noBtn.style.left = randomX + 'px';
-            noBtn.style.top = randomY + 'px';
-        }
-
-        // --- ACCEPT LOVE ---
-        function acceptLove() {
-            const mainCard = document.getElementById('mainCard');
-            const successCard = document.getElementById('successCard');
-
-            mainCard.style.transition = "opacity 0.5s ease";
-            mainCard.style.opacity = "0";
-
-            setTimeout(() => {
-                mainCard.style.display = 'none';
-                successCard.style.display = 'block';
-                setTimeout(() => {
-                    successCard.classList.add('show-success');
-                }, 50);
-                launchConfetti();
-            }, 500);
-        }
-
-        function launchConfetti() {
-            var duration = 3000;
-            var end = Date.now() + duration;
-
-            (function frame() {
-                confetti({
-                    particleCount: 7,
-                    angle: 60,
-                    spread: 55,
-                    origin: { x: 0 },
-                    colors: ['#ff477e', '#ffd700', '#ffffff']
-                });
-                confetti({
-                    particleCount: 7,
-                    angle: 120,
-                    spread: 55,
-                    origin: { x: 1 },
-                    colors: ['#ff477e', '#ffd700', '#ffffff']
-                });
-
-                if (Date.now() < end) {
-                    requestAnimationFrame(frame);
-                }
-            }());
-        }
-    </script>
-</body>
-</html>
