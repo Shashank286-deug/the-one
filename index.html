@@ -11,23 +11,22 @@
         body {
             margin: 0;
             padding: 0;
-            /* Soft royal gradient */
             background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 99%, #fecfef 100%);
             height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
             font-family: 'Poppins', sans-serif;
-            overflow: hidden; /* Hide scrollbars for the floating hearts */
+            overflow: hidden;
         }
 
-        /* FLOATING BACKGROUND HEARTS */
+        /* --- FLOATING HEARTS BACKGROUND --- */
         .heart-bg {
             position: absolute;
-            color: rgba(255, 255, 255, 0.5);
+            color: rgba(255, 255, 255, 0.6);
             animation: floatBackground 15s linear infinite;
             bottom: -10vh;
-            z-index: 0;
+            z-index: 0; /* Behind everything */
         }
 
         @keyframes floatBackground {
@@ -35,7 +34,50 @@
             100% { transform: translateY(-120vh) rotate(360deg); opacity: 0; }
         }
 
-        /* MAIN CARD CONTAINER */
+        /* --- F1 RACING LAYER --- */
+        .race-track {
+            position: absolute;
+            bottom: 20px; /* Position at the bottom */
+            left: 0;
+            width: 100%;
+            height: 100px;
+            z-index: 5; /* Behind the card, in front of hearts */
+            pointer-events: none; /* Let clicks pass through */
+        }
+
+        .f1-car {
+            position: absolute;
+            width: 150px; /* Size of the car */
+            bottom: 0;
+            filter: drop-shadow(4px 4px 4px rgba(0,0,0,0.3));
+        }
+
+        /* Car 1 Animation (The Leader) */
+        .car-1 {
+            left: -200px;
+            animation: raceCar 8s linear infinite;
+            animation-delay: 0s;
+            bottom: 10px;
+            z-index: 2;
+        }
+
+        /* Car 2 Animation (The Chaser) */
+        .car-2 {
+            left: -200px;
+            animation: raceCar 8s linear infinite;
+            animation-delay: 0.5s; /* 0.5s behind the first car */
+            bottom: 40px; /* Slightly higher/lower to look like overtaking */
+            z-index: 1;
+            filter: hue-rotate(220deg) drop-shadow(4px 4px 4px rgba(0,0,0,0.3)); /* Change color to Blue */
+        }
+
+        @keyframes raceCar {
+            0% { transform: translateX(-200px); }
+            10% { transform: translateX(20vw); } /* Speed up */
+            100% { transform: translateX(120vw); } /* Zoom off screen */
+        }
+
+        /* --- MAIN CARD --- */
         .container {
             background: rgba(255, 255, 255, 0.95);
             padding: 30px;
@@ -47,9 +89,9 @@
             position: relative;
             text-align: center;
             border: 2px solid #ffd700;
-            z-index: 10; /* Keep card above background hearts */
+            z-index: 20; /* Keep card on TOP */
             
-            /* SMOOTH ENTRY ANIMATION */
+            /* Entry Animation */
             opacity: 0;
             transform: translateY(20px);
             animation: fadeInUp 1s ease-out forwards;
@@ -115,7 +157,6 @@
             box-shadow: 0 5px 15px rgba(255, 71, 126, 0.4);
             z-index: 10;
             transition: transform 0.2s, box-shadow 0.2s;
-            /* PULSE ANIMATION TO ATTRACT CLICKS */
             animation: pulse 2s infinite;
         }
 
@@ -126,7 +167,7 @@
         }
 
         .btn-yes:hover {
-            transform: scale(1.15) !important; /* Override pulse on hover */
+            transform: scale(1.15) !important;
             background-color: #ff2e63;
         }
 
@@ -136,19 +177,16 @@
             position: absolute; 
             left: 60%; 
             z-index: 1; 
-            /* SUPER SMOOTH PHYSICS FOR THE NO BUTTON */
             transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1); 
         }
 
-        /* Success Message & Letter */
         .success-message {
-            display: none; /* Hidden by default */
+            display: none;
             opacity: 0;
             transform: scale(0.9);
             transition: all 0.5s ease;
         }
 
-        /* Class to trigger fade in */
         .show-success {
             display: block;
             opacity: 1;
@@ -192,6 +230,11 @@
 </head>
 <body>
 
+    <div class="race-track">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/e/e8/F1_car_Red_Bull_Racing_RB9_2013.svg" class="f1-car car-1" alt="F1 Car 1">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/e/e8/F1_car_Red_Bull_Racing_RB9_2013.svg" class="f1-car car-2" alt="F1 Car 2">
+    </div>
+
     <div class="container" id="mainCard">
         <h1>Hi Meethi 👑❤️</h1>
         
@@ -205,7 +248,7 @@
                 <li>👑 Your smile is literally my favorite thing to see.</li>
                 <li>👑 You make the boring days feel special.</li>
                 <li>👑 You are the cutest person I know.</li>
-                <li>👑 Life is just a fairytale when we are together.</li>
+                <li>👑 Life is a race, but I only want to finish it with you.</li>
             </ul>
         </div>
 
@@ -227,7 +270,7 @@
                 Every moment with you feels like a happy memory in the making.
             </p>
             <p>
-                I promise to always treat you like royalty, to make you smile, and to support you always.
+                I promise to always treat you like royalty, to make you smile, and to be your biggest fan.
                 Thank you for being my Bacha. ❤️
             </p>
             <p>
@@ -235,11 +278,12 @@
                 <strong>Shashank (Your Prince 👑)</strong>
             </p>
         </div>
+
         <img src="https://media.giphy.com/media/1HQG7F11R6Rfa/giphy.gif" alt="Royal Love Dance">
     </div>
 
     <script>
-        // --- LOGIC: CREATE FLOATING HEARTS BACKGROUND ---
+        // --- FLOATING HEARTS BACKGROUND ---
         function createHeart() {
             const heart = document.createElement('div');
             heart.classList.add('heart-bg');
@@ -248,14 +292,11 @@
             heart.style.fontSize = Math.random() * 20 + 10 + 'px';
             heart.style.animationDuration = Math.random() * 5 + 10 + 's';
             document.body.appendChild(heart);
-
-            setTimeout(() => {
-                heart.remove();
-            }, 15000);
+            setTimeout(() => { heart.remove(); }, 15000);
         }
-        setInterval(createHeart, 600); // Create a new heart every 0.6 seconds
+        setInterval(createHeart, 600);
 
-        // --- LOGIC: NO BUTTON ESCAPE ---
+        // --- NO BUTTON ESCAPE ---
         const noBtn = document.getElementById('noBtn');
         function moveButton() {
             const btnRect = noBtn.getBoundingClientRect();
@@ -270,29 +311,21 @@
             noBtn.style.top = randomY + 'px';
         }
 
-        // --- LOGIC: ACCEPT LOVE (SMOOTH TRANSITION) ---
+        // --- ACCEPT LOVE ---
         function acceptLove() {
             const mainCard = document.getElementById('mainCard');
             const successCard = document.getElementById('successCard');
 
-            // 1. Fade out the main card
             mainCard.style.transition = "opacity 0.5s ease";
             mainCard.style.opacity = "0";
 
-            // 2. Wait for fade out, then switch cards
             setTimeout(() => {
                 mainCard.style.display = 'none';
-                
-                // Show success card
                 successCard.style.display = 'block';
-                // Slight delay to allow display:block to apply before changing opacity
                 setTimeout(() => {
                     successCard.classList.add('show-success');
                 }, 50);
-
-                // 3. Launch Confetti
                 launchConfetti();
-
             }, 500);
         }
 
