@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>For Meethi ❤️</title>
+    <title>For My Queen ❤️</title>
     <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Poppins:wght@400;600&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
     
@@ -11,25 +11,52 @@
         body {
             margin: 0;
             padding: 0;
+            /* Soft royal gradient */
             background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 99%, #fecfef 100%);
-            min-height: 100vh;
+            height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
             font-family: 'Poppins', sans-serif;
-            overflow-x: hidden;
+            overflow: hidden; /* Hide scrollbars for the floating hearts */
         }
 
+        /* FLOATING BACKGROUND HEARTS */
+        .heart-bg {
+            position: absolute;
+            color: rgba(255, 255, 255, 0.5);
+            animation: floatBackground 15s linear infinite;
+            bottom: -10vh;
+            z-index: 0;
+        }
+
+        @keyframes floatBackground {
+            0% { transform: translateY(0) rotate(0deg); opacity: 1; }
+            100% { transform: translateY(-120vh) rotate(360deg); opacity: 0; }
+        }
+
+        /* MAIN CARD CONTAINER */
         .container {
             background: rgba(255, 255, 255, 0.95);
             padding: 30px;
             border-radius: 20px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+            box-shadow: 0 10px 30px rgba(214, 51, 132, 0.2);
             max-width: 500px;
             width: 90%;
             margin: 20px;
             position: relative;
             text-align: center;
+            border: 2px solid #ffd700;
+            z-index: 10; /* Keep card above background hearts */
+            
+            /* SMOOTH ENTRY ANIMATION */
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeInUp 1s ease-out forwards;
+        }
+
+        @keyframes fadeInUp {
+            to { opacity: 1; transform: translateY(0); }
         }
 
         h1 {
@@ -47,7 +74,6 @@
             font-size: 1rem;
         }
 
-        /* The List of Reasons */
         .reasons {
             text-align: left;
             margin: 20px 0;
@@ -55,6 +81,7 @@
             background-color: #fff0f5;
             padding: 15px;
             border-radius: 10px;
+            border-left: 4px solid #ffd700;
         }
 
         .reasons li {
@@ -63,7 +90,6 @@
             list-style-type: none;
         }
 
-        /* Buttons */
         .buttons {
             margin-top: 30px;
             display: flex;
@@ -88,11 +114,19 @@
             color: white;
             box-shadow: 0 5px 15px rgba(255, 71, 126, 0.4);
             z-index: 10;
-            transition: transform 0.2s;
+            transition: transform 0.2s, box-shadow 0.2s;
+            /* PULSE ANIMATION TO ATTRACT CLICKS */
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); box-shadow: 0 0 20px rgba(255, 71, 126, 0.6); }
+            100% { transform: scale(1); }
         }
 
         .btn-yes:hover {
-            transform: scale(1.1);
+            transform: scale(1.15) !important; /* Override pulse on hover */
             background-color: #ff2e63;
         }
 
@@ -102,17 +136,28 @@
             position: absolute; 
             left: 60%; 
             z-index: 1; 
-            transition: all 0.3s ease; /* Smooth gliding */
+            /* SUPER SMOOTH PHYSICS FOR THE NO BUTTON */
+            transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1); 
         }
 
         /* Success Message & Letter */
         .success-message {
-            display: none;
+            display: none; /* Hidden by default */
+            opacity: 0;
+            transform: scale(0.9);
+            transition: all 0.5s ease;
+        }
+
+        /* Class to trigger fade in */
+        .show-success {
+            display: block;
+            opacity: 1;
+            transform: scale(1);
         }
         
         .letter-box {
             background-color: #fffbf0;
-            border: 2px dashed #ff477e;
+            border: 2px dashed #d63384;
             padding: 20px;
             border-radius: 10px;
             margin-top: 20px;
@@ -120,6 +165,16 @@
             font-size: 0.95rem;
             line-height: 1.6;
             color: #555;
+            position: relative;
+        }
+        
+        .letter-box::after {
+            content: '👑';
+            position: absolute;
+            top: -15px;
+            right: -10px;
+            font-size: 2rem;
+            background: #fff;
         }
         
         .letter-box strong {
@@ -131,25 +186,26 @@
             border-radius: 10px;
             margin-top: 20px;
             box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            border: 3px solid #ffd700;
         }
     </style>
 </head>
 <body>
 
     <div class="container" id="mainCard">
-        <h1>Hi Meethi ❤️</h1>
+        <h1>Hi Meethi 👑❤️</h1>
         
         <p class="quote">
             "In all the world, there is no heart for me like yours."
         </p>
 
         <div class="reasons">
-            <strong>Why I adore my Bacha:</strong>
+            <strong>Why you are my Queen:</strong>
             <ul>
-                <li>✨ Your smile is literally my favorite thing to see.</li>
-                <li>✨ You make the boring days feel special.</li>
-                <li>✨ You are the cutest person I know.</li>
-                <li>✨ Life is just better when we are together.</li>
+                <li>👑 Your smile is literally my favorite thing to see.</li>
+                <li>👑 You make the boring days feel special.</li>
+                <li>👑 You are the cutest person I know.</li>
+                <li>👑 Life is just a fairytale when we are together.</li>
             </ul>
         </div>
 
@@ -162,16 +218,16 @@
     </div>
 
     <div class="container success-message" id="successCard">
-        <h1>Yay! ❤️</h1>
+        <h1>Yay! 👑❤️</h1>
         
         <div class="letter-box">
-            <p><strong>My Dearest Meethi,</strong></p>
+            <p><strong>My Dearest Queen Meethi,</strong></p>
             <p>
                 I've been wanting to tell you this for a while. You really are the most special person in my life. 
                 Every moment with you feels like a happy memory in the making.
             </p>
             <p>
-                I promise to always make you smile, to support you, and to be your favorite person, just like you are mine.
+                I promise to always treat you like royalty, to make you smile, and to support you always.
                 Thank you for being my Bacha. ❤️
             </p>
             <p>
@@ -179,12 +235,28 @@
                 <strong>Shashank (Your Prince 👑)</strong>
             </p>
         </div>
-        <img src="https://media.giphy.com/media/26BRv0ThflsHCqDrG/giphy.gif" alt="Happy Love">
+        <img src="https://media.giphy.com/media/1HQG7F11R6Rfa/giphy.gif" alt="Royal Love Dance">
     </div>
 
     <script>
-        const noBtn = document.getElementById('noBtn');
+        // --- LOGIC: CREATE FLOATING HEARTS BACKGROUND ---
+        function createHeart() {
+            const heart = document.createElement('div');
+            heart.classList.add('heart-bg');
+            heart.innerHTML = '❤️';
+            heart.style.left = Math.random() * 100 + 'vw';
+            heart.style.fontSize = Math.random() * 20 + 10 + 'px';
+            heart.style.animationDuration = Math.random() * 5 + 10 + 's';
+            document.body.appendChild(heart);
 
+            setTimeout(() => {
+                heart.remove();
+            }, 15000);
+        }
+        setInterval(createHeart, 600); // Create a new heart every 0.6 seconds
+
+        // --- LOGIC: NO BUTTON ESCAPE ---
+        const noBtn = document.getElementById('noBtn');
         function moveButton() {
             const btnRect = noBtn.getBoundingClientRect();
             const maxX = window.innerWidth - btnRect.width - 50;
@@ -198,11 +270,33 @@
             noBtn.style.top = randomY + 'px';
         }
 
+        // --- LOGIC: ACCEPT LOVE (SMOOTH TRANSITION) ---
         function acceptLove() {
-            document.getElementById('mainCard').style.display = 'none';
-            document.getElementById('successCard').style.display = 'block';
-            
-            // Confetti Explosion
+            const mainCard = document.getElementById('mainCard');
+            const successCard = document.getElementById('successCard');
+
+            // 1. Fade out the main card
+            mainCard.style.transition = "opacity 0.5s ease";
+            mainCard.style.opacity = "0";
+
+            // 2. Wait for fade out, then switch cards
+            setTimeout(() => {
+                mainCard.style.display = 'none';
+                
+                // Show success card
+                successCard.style.display = 'block';
+                // Slight delay to allow display:block to apply before changing opacity
+                setTimeout(() => {
+                    successCard.classList.add('show-success');
+                }, 50);
+
+                // 3. Launch Confetti
+                launchConfetti();
+
+            }, 500);
+        }
+
+        function launchConfetti() {
             var duration = 3000;
             var end = Date.now() + duration;
 
@@ -211,13 +305,15 @@
                     particleCount: 7,
                     angle: 60,
                     spread: 55,
-                    origin: { x: 0 }
+                    origin: { x: 0 },
+                    colors: ['#ff477e', '#ffd700', '#ffffff']
                 });
                 confetti({
                     particleCount: 7,
                     angle: 120,
                     spread: 55,
-                    origin: { x: 1 }
+                    origin: { x: 1 },
+                    colors: ['#ff477e', '#ffd700', '#ffffff']
                 });
 
                 if (Date.now() < end) {
